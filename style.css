@@ -1,0 +1,60 @@
+
+#board {
+    background-color: white;
+    
+}
+.node {
+    min-width: 22px;
+    max-width: 22px;
+    height: 22px;
+    width: 22px;
+    /* border-radius: 40px; */
+    border: solid lightblue;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    /* font-weight: bold; */
+}
+.node.start {
+    border: solid green;
+    background-image: url('images/hiking.svg');
+}
+
+.node.target{
+    border: solid red;
+    background-image: url('images/maps-and-flags.svg');
+
+}
+.node.visited{
+    background-color:lightblue;
+}
+.node.path{
+    background-color: yellow;
+}
+.text_in_node{
+    color: lightblue;
+    font-weight: bold;
+
+}
+.transparent{
+    opacity: 0;
+}
+button {
+    background-color: skyblue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+#initDijkstra{
+    background-color: #4CAF50;
+}
+header{
+    height: 20vh;
+    width: 80vw;
+}
+body {
+    align-items: center;
+}
