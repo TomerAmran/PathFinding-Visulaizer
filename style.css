@@ -16,12 +16,12 @@
 }
 .node.start {
     border: solid green;
-    background-image: url('images/hiking.svg');
+    background-image: url('hiking.svg');
 }
 
 .node.target{
     border: solid red;
-    background-image: url('images/maps-and-flags.svg');
+    background-image: url('maps-and-flags.svg');
 
 }
 .node.visited{
