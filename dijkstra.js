@@ -27,12 +27,12 @@ class Dijkstra {
                 setTimeout(() => {
                     node.setVISITED;
                     this.visualizePath();   
-                },i*20);
+                },i*10);
                 
                 break;
             }
             else
-                setTimeout(node.setVISITED,i*20);
+                setTimeout(node.setVISITED,i*10);
         } 
     }
 
