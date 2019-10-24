@@ -1,35 +1,41 @@
 class Dijkstra {
     constructor(board) {
         this.board = board;
-        this.unvisited = board.nodesMatrix.matrix.flat();
-        this.unvisited.sort((a,b)=> (a.DISTANCE > b.DISTANCE) ? 1: -1);
+        this.unvisited =[];
         this.visitOrder =[];
     }
 
     init = () => {
+        this.unvisited = this.board.nodesMatrix.getALLasArray();
+        this.unvisited.sort((a,b)=> (a.DISTANCE > b.DISTANCE) ? 1: -1);
         while (this.unvisited.length >0) {
-            const curr = this.unvisited.shift();
-            this.visitOrder.push(curr);
-            for (const neigh of curr.neighbors) {
-                neigh.evaluate(curr);
+            const node = this.unvisited.shift();
+            if (!node.WALL){
+                // node.VISITED = true;
+                this.visitOrder.push(node);
+                for (const neigh of node.neighbors) {
+                    if (!neigh.WALL)
+                        neigh.evaluate(node);
+                }
+                this.unvisited.sort((a,b)=> (a.DISTANCE > b.DISTANCE) ? 1: -1);
             }
-            this.unvisited.sort((a,b)=> (a.DISTANCE > b.DISTANCE) ? 1: -1);
         }
-        console.log(this.board.nodesMatrix.matrix);
-        console.log(this.visitOrder);
     }
 
     visualize = () => {
         for (let i = 0; i < this.visitOrder.length ; i++){
-            const node = this.visitOrder[i];
-            
+            const node = this.visitOrder[i];    
             if (node.TARGET_NODE) {
                 setTimeout(() => {
-                    node.setVISITED;
+                    node.setVISITED();
                     this.visualizePath();   
                 },i*10);
                 
                 break;
+            }
+            else if (node.DISTANCE === Infinity){
+                this.visualizePath();
+                break;   
             }
             else
                 setTimeout(node.setVISITED,i*10);
@@ -37,7 +43,7 @@ class Dijkstra {
     }
 
     visualizePath = () => {
-        this.board.clearHTML();
+        // this.board.clearHTML();
         let curr = this.board.targetNode;
         let i = 1;
         while(curr) {
@@ -47,5 +53,27 @@ class Dijkstra {
         }
     }
 
-    
+    instantVisualize = () => {
+        for (let i = 0; i < this.visitOrder.length ; i++){
+            const node = this.visitOrder[i];    
+            if (node.TARGET_NODE) {
+                node.setVISITED();
+                this.instantVisualizePath();
+                break;
+            }
+            else if (node.DISTANCE === Infinity){
+                this.visualizePath();
+                break;   
+            }
+            else  node.setVISITED();
+        }
+    }
+
+    instantVisualizePath = () => {
+        let curr = this.board.targetNode;
+        while(curr) {
+            curr.setPATH();
+            curr = curr.PREV;
+        }
+    }
 }

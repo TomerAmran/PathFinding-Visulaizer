@@ -11,6 +11,7 @@ class Node {
         this.POSITION = '';
         this.PREV;
         this.htmlElement;
+        this.WALL = false;
     }
 
     createNeighborsList = (nodesMatrix) => {
@@ -87,27 +88,52 @@ class Node {
     setTARGET = () => {
         this.TARGET_NODE = true;
         this.htmlElement.classList.add('target');
-        this.htmlElement.childNodes[0].classList.add('transparent');
+        this.setTextTransparent();
     }
     removeTARGET = () => {
         this.TARGET_NODE = false;
-        this.htmlElement.classList.add('target');
-        this.htmlElement.childNodes[0].classList.remove('transparent');
+        this.htmlElement.classList.remove('target');
+        this.removeTextTransparent();
     }
 
     setSTART = () => {
         this.START_NODE = true;
         this.htmlElement.classList.add('start');
-        console.log(this.htmlElement);
-        
-        this.htmlElement.childNodes[0].classList.add('transparent');
+        this.setTextTransparent();        
         this.DISTANCE = 0;
     }
     removeSTART = () => {
         this.START_NODE = false;
         this.htmlElement.classList.remove('start');
-        this.htmlElement.childNodes[0].classList.remove('transparent');
+        this.removeTextTransparent();        
         this.DISTANCE = Infinity;
+    }
+    setWALL= () => {
+        if (!this.WALL) {
+            this.WALL = true;
+            this.htmlElement.classList.add('wall');
+            this.setTextTransparent();
+        }
+    }
+    removeWALL = () => {
+        if(this.WALL) {
+            this.WALL = false;
+            this.htmlElement.classList.remove('wall');
+            this.removeTextTransparent();
+        }
+    }
+    toggleWALL = () => {
+        (this.WALL) ? this.removeWALL(): this.setWALL();
+    }
+    setTextTransparent = () => {
+        this.htmlElement.childNodes[0].classList.add('transparent');
+    }
+    removeTextTransparent = () => {
+        this.htmlElement.childNodes[0].classList.remove('transparent');
+    }
+    
+    setText = (string) => {
+        this.htmlElement.childNodes[0].innerHTML = string;
     }
 }
 

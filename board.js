@@ -8,13 +8,15 @@ class Board {
         this.nSize; //matrix notation
         this.startNode;
         this.targetNode;  
+        this.eventStatus = ''; //receive: undefined , 'movingSTART', 'movingTARGET', 'toggleWALLs'
+        this.postAlgo = false;
     }
 
     createBoard = () => {
         const board = this.boardElement;
          //set board dementions
-        this.width = window.innerWidth;
-        this.height = window.innerHeight * 0.8;
+        this.width = window.innerWidth*0.9;
+        this.height = window.innerHeight * 0.78;
         board.style.width = this.width;
         board.style.height = this.height;
         this.mSize = Math.floor(this.height/30);
@@ -45,9 +47,8 @@ class Board {
             }
         }
         //add a function to move
-        this.setStartNode(Math.floor(this.mSize/2),Math.floor(this.nSize/4));
-        this.setTargetNode(Math.floor(this.mSize/2),Math.floor(this.nSize*3/4));
-        
+        this.setDefualtStart();
+        this.setDefualtTarget();
         this.nodesMatrix.creatNeighborsListOfEachNode();
         creatEventListeners(this);
     }
@@ -83,18 +84,23 @@ class Board {
          //maybe i should use switch insted of if's   
     }
 
-    setStartNode = (m,n) => {
-        const node = this.nodesMatrix.get(m,n);
+    setStartNode = (node) => {
         node.setSTART();
         this.startNode = node;
     }
-    
-    setTargetNode = (m,n) => {
-        const node = this.nodesMatrix.get(m,n);
+    removeStartNode = (node) => {
+        node.removeSTART();
+        this.startNode = undefined;
+    }
+    setTargetNode = (node) => {
         node.setTARGET();
         this.targetNode = node;
     }
-    clearHTML = () => {
+    removeTargetNode = (node) => {
+        node.removeTARGET();
+        this.targetNode = undefined;
+    }
+    cleanHTML = () => {
         const allNodes = this.nodesMatrix.getALLasArray();
         for (const node of allNodes) {
             node.setUNVISITED();
@@ -106,7 +112,7 @@ class Board {
         const allNodes = this.nodesMatrix.getALLasArray();
         for (const node of allNodes){
             node.WEIGHT =1;
-            node.htmlElement.childNodes[0].innerHTML = ``;
+            node.setText('');
         }
     }
     
@@ -115,19 +121,68 @@ class Board {
         for (const node of allNodes){
             const random = Math.floor(Math.random()*10+1);
             node.WEIGHT = random;
-            node.htmlElement.childNodes[0].innerHTML = `${random}`;
+            node.setText(`${random}`);
         }
     }
 
     initDijkstra = () => {
-        this.clearHTML();
+        this.postAlgo = true;
+        this.cleanHTML();
+        this.cleanDistances();
+        this.cleanVisited();
         const dijkstra = new Dijkstra(this);
         dijkstra.init();
         dijkstra.visualize();
     }
-    
+    setDefualtStart = () => {
+        const node =this.nodesMatrix.get(Math.floor(this.mSize/2),Math.floor(this.nSize/4));
+        node.removeWALL();
+        node.removeTARGET();
+        this.setStartNode(node);
+    }
+    setDefualtTarget = () => {
+        const node = this.nodesMatrix.get(Math.floor(this.mSize/2),Math.floor(this.nSize*3/4));
+        node.removeWALL();
+        node.removeSTART();
+        this.setTargetNode(node);
+    }
+    cleanDistances = () => {
+        for (const node of this.nodesMatrix.getALLasArray()){
+            if (!node.START_NODE)
+                node.DISTANCE = Infinity;
+        }
+    }
+    cleanVisited = () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            node.VISITED = false;
+    }
+    cleanPREV = () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            node.PREV = undefined;
+    }
+    cleanWALLs = () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            node.removeWALL();
+    }
+    redoDijkstra = () => {
+        this.cleanHTML();
+        this.cleanDistances();
+        this.cleanVisited();
+        this.cleanPREV();
+        const dijkstra = new Dijkstra(this);
+        dijkstra.init();
+        dijkstra.instantVisualize();
+    }
+    clearButton = () => {
+        this.cleanHTML();
+        this.cleanDistances();
+        this.cleanVisited();
+        this.cleanPREV();
+        this.cleanWALLs();
+        this.postAlgo = false;
+    }
 }
 
 const newBoard = new Board();
 newBoard.createBoard();
-newBoard.randomWeights();
+newBoard.evenWeights();

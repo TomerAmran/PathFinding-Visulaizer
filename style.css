@@ -1,7 +1,7 @@
 
 #board {
     background-color: white;
-    
+    margin: auto;    
 }
 .node {
     min-width: 22px;
@@ -14,14 +14,17 @@
     font-family: 'Lato', sans-serif;
     /* font-weight: bold; */
 }
+.node:hover{
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
 .node.start {
-    border: solid green;
-    background-image: url('hiking.svg');
+    /* border: solid green; */
+    background-image: url('images/car.svg');
 }
 
 .node.target{
-    border: solid red;
-    background-image: url('maps-and-flags.svg');
+    /* border: solid red; */
+    background-image: url('images/placeholder.svg');
 
 }
 .node.visited{
@@ -30,10 +33,23 @@
 .node.path{
     background-color: yellow;
 }
+.node.wall{
+    background-color: black;
+    border: solid black;
+}
+.node.hoverSTART {
+    background-image: url('images/car.svg');
+    opacity: 0.6;
+}
+.node.hoverTARGET{
+    background-image: url('images/placeholder.svg');
+    opacity: 0.6;
+}
+
 .text_in_node{
     color: lightblue;
     font-weight: bold;
-
+    user-select: none;
 }
 .transparent{
     opacity: 0;
@@ -54,7 +70,8 @@ button {
 header{
     height: 20vh;
     width: 80vw;
+    margin: auto;
 }
 body {
-    align-items: center;
+    margin: auto;
 }
