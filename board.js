@@ -16,7 +16,7 @@ class Board {
         const board = this.boardElement;
          //set board dementions
         this.width = window.innerWidth*0.9;
-        this.height = window.innerHeight * 0.78;
+        this.height = window.innerHeight * 0.85;
         board.style.width = this.width;
         board.style.height = this.height;
         this.mSize = Math.floor(this.height/30);

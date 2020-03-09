@@ -3,6 +3,11 @@ function creatEventListeners(board) {
     document.getElementById('initDijkstra').addEventListener('click', board.initDijkstra);
     document.getElementById('even_weights').addEventListener('click', board.evenWeights);
     document.getElementById('random_weights').addEventListener('click', board.randomWeights);
+    document.getElementById('skip').addEventListener('click',tutorial.exit)
+    document.getElementById('tutorialButton').addEventListener('click',tutorial.initTutorail)
+    document.getElementById('next').addEventListener('click',tutorial.next);
+    document.getElementById('prev').addEventListener('click',tutorial.prev);
+
 
     for (const node of board.nodesMatrix.getALLasArray()){
         const element = node.htmlElement;
