@@ -1,5 +1,7 @@
 class NodesMatrix {
     constructor(m,n){
+        this.m = m;
+        this.n = n;
         if (m<1 || n<1)
             throw new Error('size should be a positive integer')
         //init matrix 
@@ -16,16 +18,36 @@ class NodesMatrix {
         return this.matrix[m-1][n-1];
     }
     getRightNeighborOf = (node) => {
-        return this.get(node.m,node.n+1);
+        let t;
+        if (node.n+1 == this.n+1)
+            t = 1;
+        else t = node.n+1;
+        return this.get(node.m,t);
     }
     getLeftNeighborOf = (node) => {
-        return this.get(node.m,node.n-1);
+        let t;
+        if (node.n-1 == 0)
+            t = this.n;
+        else t = node.n-1;
+        return this.get(node.m,t);
     }
     getUpNeighborOf = (node) => {
-        return this.get(node.m-1,node.n);
+        let t =0;
+        // console.log(node.m-1);
+        if (node.m-1 == 0)
+            t = this.m;
+        else {
+            t = (node.m-1);
+        }
+        return this.get(t,node.n);
     }
     getDownNeighborOf = (node) => {
-        return this.get(node.m+1,node.n);
+        let t;
+        if (node.m+1 == this.m+1)
+            t = 1;
+        else t = node.m+1;
+        console.log(t);
+        return this.get(t,node.n);
     }
 
 
