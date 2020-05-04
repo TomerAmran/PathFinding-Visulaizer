@@ -46,9 +46,9 @@ class DFS{
                 to.PREV = from;
                 this.exploreNode(to);
             }
-            else if (from.discoverd < to.discoverd){
-                to.PREV = from;
-            }
+            // else if (from.discoverd < to.discoverd){
+            //     to.PREV = from;
+            // }
         }
         
 
