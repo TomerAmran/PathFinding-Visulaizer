@@ -1,6 +1,7 @@
 function creatEventListeners(board) {
     document.getElementById('clear').addEventListener('click', board.clearButton);
     document.getElementById('initDijkstra').addEventListener('click', board.initDijkstra);
+    document.getElementById('initDFS').addEventListener('click', board.initDFS);
     document.getElementById('even_weights').addEventListener('click', board.evenWeights);
     document.getElementById('random_weights').addEventListener('click', board.randomWeights);
     document.getElementById('skip').addEventListener('click',tutorial.exit)

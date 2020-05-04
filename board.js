@@ -21,7 +21,7 @@ class Board {
         board.style.height = this.height;
         this.mSize = Math.floor(this.height/30);
         this.nSize = Math.floor(this.width/30);
-        //creat HTML boardwoth 'table' element (tr,td)
+        //creat HTML board with 'table' element (tr,td)
         for (let i=1 ; i<=this.mSize; i++) {
             const row = document.createElement('tr');
             row.id = `row ${i}`;
@@ -36,7 +36,7 @@ class Board {
             }
             board.appendChild(row);
         }
-        //creat nodes (for the algorithem)
+        //create nodes (for the algorithem)
         this.nodesMatrix = new NodesMatrix(this.mSize,this.nSize);
         for (let i=1 ; i<=this.mSize; i++) {
             for (let j=1 ; j<=this.nSize; j++){
@@ -126,6 +126,7 @@ class Board {
     }
 
     initDijkstra = () => {
+        this.randomWeights();
         this.postAlgo = true;
         this.cleanHTML();
         this.cleanDistances();
@@ -133,6 +134,17 @@ class Board {
         const dijkstra = new Dijkstra(this);
         dijkstra.init();
         dijkstra.visualize();
+    }
+    
+    initDFS = () => {
+        this.evenWeights();
+        this.postAlgo = true;
+        this.cleanHTML();
+        this.cleanDistances();
+        this.cleanVisited();
+        const dfs = new DFS(this);
+        dfs.init();
+        dfs.visualize();
     }
     setDefualtStart = () => {
         const node =this.nodesMatrix.get(Math.floor(this.mSize/2),Math.floor(this.nSize/4));
@@ -183,6 +195,6 @@ class Board {
     }
 }
 
-const newBoard = new Board();
-newBoard.createBoard();
-newBoard.evenWeights();
+// const newBoard = new Board();
+// newBoard.createBoard();
+// newBoard.evenWeights();

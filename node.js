@@ -15,56 +15,56 @@ class Node {
     }
 
     createNeighborsList = (nodesMatrix) => {
-        // switch(this.POSITION){
-        //     case ('TOP_LEFT'):
-        //         this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
-        //         break;
-        //     case('TOP_RIGHT'):
-        //         this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
-        //         break;
-        //     case('BOTTOM_LEFT'):
-        //         this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
-        //         break;
-        //     case('BOTTOM_RIGHT'):
-        //         this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
-        //         break;
-        //     case('LEFT_EDGE'):
-        //         this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
-        //         break;
-        //     case('TOP_EDGE'):
-        //         this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
-        //         break;
-        //     case('RIGHT_EDGE'):
-        //         this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
-        //         break;
-        //     case('BOTTOM_EDGE'):
-        //         this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
-        //         break;
-        //     case('INNER'):
-        //         this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
-        //         this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
-        //         break;
-        //     default:
-        //         throw new Error(`POSITION isn't named correctly or not define./n value:${this.POSITION} `)
-        // }
-        this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+        switch(this.POSITION){
+            case ('TOP_LEFT'):
+                this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+                break;
+            case('TOP_RIGHT'):
+                this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
+                break;
+            case('BOTTOM_LEFT'):
+                this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
+                break;
+            case('BOTTOM_RIGHT'):
+                this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
+                break;
+            case('LEFT_EDGE'):
+                this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
+                break;
+            case('TOP_EDGE'):
+                this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
+                break;
+            case('RIGHT_EDGE'):
                 this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
                 this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
                 this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
+                break;
+            case('BOTTOM_EDGE'):
+                this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
+                break;
+            case('INNER'):
+                this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
+                this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
+                break;
+            default:
+                throw new Error(`POSITION isn't named correctly or not define./n value:${this.POSITION} `)
+        }
+        // this.neighbors.push(nodesMatrix.getRightNeighborOf(this));
+        // this.neighbors.push(nodesMatrix.getLeftNeighborOf(this));
+        // this.neighbors.push(nodesMatrix.getDownNeighborOf(this));
+        // this.neighbors.push(nodesMatrix.getUpNeighborOf(this));
     }
     evaluate = (sourceNode) => {
         const newDISTANCE = sourceNode.DISTANCE + this.WEIGHT;
