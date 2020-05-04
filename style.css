@@ -27,6 +27,9 @@
     background-image: url('images/placeholder.svg');
 
 }
+.node.finished{
+	background-color: lightgreen;
+}
 .node.visited{
     background-color:lightblue;
 }

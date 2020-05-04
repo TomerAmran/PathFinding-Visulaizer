@@ -9,7 +9,8 @@ class Board {
         this.startNode;
         this.targetNode;  
         this.eventStatus = ''; //receive: undefined , 'movingSTART', 'movingTARGET', 'toggleWALLs'
-        this.postAlgo = false;
+        this.postDijkstra = false;
+        this.postDFS = false;
     }
 
     createBoard = () => {
@@ -105,6 +106,7 @@ class Board {
         for (const node of allNodes) {
             node.setUNVISITED();
             node.setNOTPATH();
+            node.setUNFINISHED();
         }
     }
     
@@ -127,7 +129,7 @@ class Board {
 
     initDijkstra = () => {
         this.randomWeights();
-        this.postAlgo = true;
+        this.postDijkstra = true;
         this.cleanHTML();
         this.cleanDistances();
         this.cleanVisited();
@@ -138,10 +140,11 @@ class Board {
     
     initDFS = () => {
         this.evenWeights();
-        this.postAlgo = true;
+        this.postDFS = true;
         this.cleanHTML();
-        this.cleanDistances();
+        // this.cleanDistances();
         this.cleanVisited();
+        this.cleanDFSFields();
         const dfs = new DFS(this);
         dfs.init();
         dfs.visualize();
@@ -168,6 +171,10 @@ class Board {
         for (const node of this.nodesMatrix.getALLasArray())
             node.VISITED = false;
     }
+    cleanFINISHED= () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            node.FINISHED = false;
+    }
     cleanPREV = () => {
         for (const node of this.nodesMatrix.getALLasArray())
             node.PREV = undefined;
@@ -175,6 +182,14 @@ class Board {
     cleanWALLs = () => {
         for (const node of this.nodesMatrix.getALLasArray())
             node.removeWALL();
+    }
+    cleanDFSFields = () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            {
+                node.discoverd=-1;
+                node.finished=-1;
+                node.FINISHED = false;
+            }
     }
     redoDijkstra = () => {
         this.cleanHTML();
@@ -185,13 +200,27 @@ class Board {
         dijkstra.init();
         dijkstra.instantVisualize();
     }
+    redoDFS = () => {
+        this.cleanHTML();
+        // this.cleanDistances();
+        // this.cleanVisited();
+        // this.cleanFINISHED();
+        this.cleanPREV();
+        this.cleanDFSFields();
+        const dfs = new DFS(this);
+        dfs.init();
+        dfs.instantVisualize();
+
+    }
     clearButton = () => {
         this.cleanHTML();
         this.cleanDistances();
         this.cleanVisited();
         this.cleanPREV();
         this.cleanWALLs();
-        this.postAlgo = false;
+        this.postDijkstra = false;
+        this.postDFS = false;
+
     }
 }
 

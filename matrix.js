@@ -46,7 +46,7 @@ class NodesMatrix {
         if (node.m+1 == this.m+1)
             t = 1;
         else t = node.m+1;
-        console.log(t);
+        // console.log(t);
         return this.get(t,node.n);
     }
 

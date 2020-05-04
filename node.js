@@ -2,9 +2,6 @@ class Node {
     constructor(m,n, weight){
         this.m = m;
         this.n = n;
-        this.DISTANCE=Infinity;        
-        this.WEIGHT = weight;
-        this.neighbors = [];
         this.VISITED = false;
         this.START_NODE = false;
         this.TARGET_NODE = false;
@@ -12,6 +9,14 @@ class Node {
         this.PREV;
         this.htmlElement;
         this.WALL = false;
+        //Dijkstra fields
+        this.DISTANCE=Infinity;        
+        this.WEIGHT = weight;
+        this.neighbors = [];
+        //DFS fields
+        this.discoverd=-1;
+        this.finished=-1;
+        this.FINISHED = false;
     }
 
     createNeighborsList = (nodesMatrix) => {
@@ -75,14 +80,26 @@ class Node {
 
     }
     setVISITED = () => {
-        this.VISITED =true;
+        this.VISITED = true;
         this.htmlElement.classList.add('visited');
       
     }
     setUNVISITED = () => {
-        this.VISITED =false;
+        this.VISITED = false;
         this.htmlElement.classList.remove('visited');
     }
+    setFINISHED = () => {
+        console.log('finished');
+        this.FINISHED = true;
+        this.htmlElement.classList.add('finished');
+      
+    }
+    setUNFINISHED = () => {
+        this.FINISHED =false;
+        this.htmlElement.classList.remove('finished');
+    }
+    
+
     setPATH= () => {
         this.htmlElement.classList.add('path');
     }
