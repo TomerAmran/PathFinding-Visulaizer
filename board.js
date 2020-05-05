@@ -129,6 +129,7 @@ class Board {
 
     initDijkstra = () => {
         this.randomWeights();
+        this.postDFS = false;
         this.postDijkstra = true;
         this.cleanHTML();
         this.cleanDistances();
@@ -140,6 +141,7 @@ class Board {
     
     initDFS = () => {
         this.evenWeights();
+        this.postDijkstra = false;
         this.postDFS = true;
         this.cleanHTML();
         // this.cleanDistances();
@@ -192,6 +194,8 @@ class Board {
             }
     }
     redoDijkstra = () => {
+        this.postDijkstra = true;
+        this.postDFS = false;
         this.cleanHTML();
         this.cleanDistances();
         this.cleanVisited();
@@ -201,6 +205,8 @@ class Board {
         dijkstra.instantVisualize();
     }
     redoDFS = () => {
+        this.postDijkstra = false;
+        this.postDFS = true;
         this.cleanHTML();
         // this.cleanDistances();
         // this.cleanVisited();

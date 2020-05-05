@@ -33,14 +33,14 @@ function creatEventListeners(board) {
                 element.classList.add('hoverSTART');
                 board.setStartNode(node);
                 if (board.postDijkstra) board.redoDijkstra();
-                if (board.postDFS) board.redoDFS();
+                else if (board.postDFS) board.redoDFS();
 
             }
             if (board.eventSTATUS === 'movingTARGET' & !node.WALL & !node.START_NODE) {
                 element.classList.add('hoverTARGET');
                 board.setTargetNode(node);
                 if (board.postDijkstra) board.redoDijkstra();
-                if (board.postDFS) board.redoDFS();
+                else if (board.postDFS) board.redoDFS();
 
             }
             if (board.eventSTATUS === 'toggleWALLs' & !node.START_NODE & !node.TARGET_NODE)  {
