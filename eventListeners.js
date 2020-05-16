@@ -1,8 +1,9 @@
 function creatEventListeners(board) {
     document.getElementById('clear').addEventListener('click', board.clearButton);
     document.getElementById('initDijkstra').addEventListener('click', board.initDijkstra);
-    document.getElementById('even_weights').addEventListener('click', board.evenWeights);
-    document.getElementById('random_weights').addEventListener('click', board.randomWeights);
+    document.getElementById('initDFS').addEventListener('click', board.initDFS);
+    // document.getElementById('even_weights').addEventListener('click', board.evenWeights);
+    document.getElementById('Random/Even').addEventListener('click', board.toggleRandomEven);
     document.getElementById('skip').addEventListener('click',tutorial.exit)
     document.getElementById('tutorialButton').addEventListener('click',tutorial.initTutorail)
     document.getElementById('next').addEventListener('click',tutorial.next);
@@ -31,12 +32,16 @@ function creatEventListeners(board) {
             if (board.eventSTATUS === 'movingSTART' & !node.WALL & !node.TARGET_NODE) {
                 element.classList.add('hoverSTART');
                 board.setStartNode(node);
-                if (board.postAlgo) board.redoDijkstra();
+                if (board.postDijkstra) board.redoDijkstra();
+                else if (board.postDFS) board.redoDFS();
+
             }
             if (board.eventSTATUS === 'movingTARGET' & !node.WALL & !node.START_NODE) {
                 element.classList.add('hoverTARGET');
                 board.setTargetNode(node);
-                if (board.postAlgo) board.redoDijkstra();
+                if (board.postDijkstra) board.redoDijkstra();
+                else if (board.postDFS) board.redoDFS();
+
             }
             if (board.eventSTATUS === 'toggleWALLs' & !node.START_NODE & !node.TARGET_NODE)  {
                 node.toggleWALL();

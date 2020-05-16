@@ -27,6 +27,9 @@
     background-image: url('images/placeholder.svg');
 
 }
+.node.finished{
+	background-color: lightgreen;
+}
 .node.visited{
     background-color:lightblue;
 }
@@ -68,17 +71,18 @@ button {
     font-weight: bold;
     opacity: 0.7;
     transition: 0.3s;
-    outline:none;
+	outline:none;
+	/* width: 150px; */
    
   }
 button:hover {
     opacity: 1
 }
-#initDijkstra{
+/* #initDijkstra{
     background-color: #4CAF50;
     color: white;
     opacity: 0.8;
-}
+} */
 #initDijkstra:hover{
     opacity: 1;
 }
@@ -101,9 +105,10 @@ button:hover {
 
 .header-user-dropdown .header-limiter h1{
 	float: left;
-	font: normal 36px Cookie, Arial, Helvetica, sans-serif;
+	font:  40px calibri light;
 	line-height: 40px;
 	margin:0;
+	font-weight: bold;
 }
 
 .header-user-dropdown .header-limiter h1 span {
@@ -243,7 +248,9 @@ button:hover {
 }
 body {
     margin-top: auto;
-    
+	padding: 0;
+	margin: 0; 
+	
 }
 #tutorial{
         position: absolute;

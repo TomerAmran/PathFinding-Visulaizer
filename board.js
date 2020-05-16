@@ -9,7 +9,9 @@ class Board {
         this.startNode;
         this.targetNode;  
         this.eventStatus = ''; //receive: undefined , 'movingSTART', 'movingTARGET', 'toggleWALLs'
-        this.postAlgo = false;
+        this.postDijkstra = false;
+        this.postDFS = false;
+        this.Random =false;
     }
 
     createBoard = () => {
@@ -21,7 +23,7 @@ class Board {
         board.style.height = this.height;
         this.mSize = Math.floor(this.height/30);
         this.nSize = Math.floor(this.width/30);
-        //creat HTML boardwoth 'table' element (tr,td)
+        //creat HTML board with 'table' element (tr,td)
         for (let i=1 ; i<=this.mSize; i++) {
             const row = document.createElement('tr');
             row.id = `row ${i}`;
@@ -36,7 +38,7 @@ class Board {
             }
             board.appendChild(row);
         }
-        //creat nodes (for the algorithem)
+        //create nodes (for the algorithem)
         this.nodesMatrix = new NodesMatrix(this.mSize,this.nSize);
         for (let i=1 ; i<=this.mSize; i++) {
             for (let j=1 ; j<=this.nSize; j++){
@@ -105,6 +107,7 @@ class Board {
         for (const node of allNodes) {
             node.setUNVISITED();
             node.setNOTPATH();
+            node.setUNFINISHED();
         }
     }
     
@@ -119,20 +122,47 @@ class Board {
     randomWeights = () => {
         const allNodes = this.nodesMatrix.getALLasArray();
         for (const node of allNodes){
-            const random = Math.floor(Math.random()*10+1);
+            const random = Math.floor(Math.random()*100+1);
             node.WEIGHT = random;
             node.setText(`${random}`);
         }
     }
-
+    toggleRandomEven =() => {
+        if(this.Random){
+            this.evenWeights();
+            // document.getElementById('initDijkstra').innerHTML= "BFS"
+            this.Random = false;
+        }
+        else{
+            this.randomWeights()
+            // document.getElementById('initDijkstra').innerHTML= "Dijkstra"
+            this.Random = true;
+        }
+    }
     initDijkstra = () => {
-        this.postAlgo = true;
+        // this.randomWeights();
+        this.postDFS = false;
+        this.postDijkstra = true;
         this.cleanHTML();
         this.cleanDistances();
         this.cleanVisited();
         const dijkstra = new Dijkstra(this);
         dijkstra.init();
         dijkstra.visualize();
+    }
+    
+    initDFS = () => {
+        this.evenWeights();
+        this.Random = false
+        this.postDijkstra = false;
+        this.postDFS = true;
+        this.cleanHTML();
+        // this.cleanDistances();
+        this.cleanVisited();
+        this.cleanDFSFields();
+        const dfs = new DFS(this);
+        dfs.init();
+        dfs.visualize();
     }
     setDefualtStart = () => {
         const node =this.nodesMatrix.get(Math.floor(this.mSize/2),Math.floor(this.nSize/4));
@@ -156,6 +186,10 @@ class Board {
         for (const node of this.nodesMatrix.getALLasArray())
             node.VISITED = false;
     }
+    cleanFINISHED= () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            node.FINISHED = false;
+    }
     cleanPREV = () => {
         for (const node of this.nodesMatrix.getALLasArray())
             node.PREV = undefined;
@@ -164,7 +198,17 @@ class Board {
         for (const node of this.nodesMatrix.getALLasArray())
             node.removeWALL();
     }
+    cleanDFSFields = () => {
+        for (const node of this.nodesMatrix.getALLasArray())
+            {
+                node.discoverd=-1;
+                node.finished=-1;
+                node.FINISHED = false;
+            }
+    }
     redoDijkstra = () => {
+        this.postDijkstra = true;
+        this.postDFS = false;
         this.cleanHTML();
         this.cleanDistances();
         this.cleanVisited();
@@ -173,16 +217,32 @@ class Board {
         dijkstra.init();
         dijkstra.instantVisualize();
     }
+    redoDFS = () => {
+        this.postDijkstra = false;
+        this.postDFS = true;
+        this.cleanHTML();
+        // this.cleanDistances();
+        // this.cleanVisited();
+        // this.cleanFINISHED();
+        this.cleanPREV();
+        this.cleanDFSFields();
+        const dfs = new DFS(this);
+        dfs.init();
+        dfs.instantVisualize();
+
+    }
     clearButton = () => {
         this.cleanHTML();
         this.cleanDistances();
         this.cleanVisited();
         this.cleanPREV();
         this.cleanWALLs();
-        this.postAlgo = false;
+        this.postDijkstra = false;
+        this.postDFS = false;
+
     }
 }
 
-const newBoard = new Board();
-newBoard.createBoard();
-newBoard.evenWeights();
+// const newBoard = new Board();
+// newBoard.createBoard();
+// newBoard.evenWeights();
