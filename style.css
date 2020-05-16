@@ -105,9 +105,10 @@ button:hover {
 
 .header-user-dropdown .header-limiter h1{
 	float: left;
-	font: normal 36px Cookie, Arial, Helvetica, sans-serif;
+	font:  40px calibri light;
 	line-height: 40px;
 	margin:0;
+	font-weight: bold;
 }
 
 .header-user-dropdown .header-limiter h1 span {
@@ -247,7 +248,9 @@ button:hover {
 }
 body {
     margin-top: auto;
-    
+	padding: 0;
+	margin: 0; 
+	
 }
 #tutorial{
         position: absolute;
