@@ -11,6 +11,7 @@ class Board {
         this.eventStatus = ''; //receive: undefined , 'movingSTART', 'movingTARGET', 'toggleWALLs'
         this.postDijkstra = false;
         this.postDFS = false;
+        this.Random =false;
     }
 
     createBoard = () => {
@@ -121,14 +122,25 @@ class Board {
     randomWeights = () => {
         const allNodes = this.nodesMatrix.getALLasArray();
         for (const node of allNodes){
-            const random = Math.floor(Math.random()*10+1);
+            const random = Math.floor(Math.random()*100+1);
             node.WEIGHT = random;
             node.setText(`${random}`);
         }
     }
-
+    toggleRandomEven =() => {
+        if(this.Random){
+            this.evenWeights();
+            // document.getElementById('initDijkstra').innerHTML= "BFS"
+            this.Random = false;
+        }
+        else{
+            this.randomWeights()
+            // document.getElementById('initDijkstra').innerHTML= "Dijkstra"
+            this.Random = true;
+        }
+    }
     initDijkstra = () => {
-        this.randomWeights();
+        // this.randomWeights();
         this.postDFS = false;
         this.postDijkstra = true;
         this.cleanHTML();
@@ -141,6 +153,7 @@ class Board {
     
     initDFS = () => {
         this.evenWeights();
+        this.Random = false
         this.postDijkstra = false;
         this.postDFS = true;
         this.cleanHTML();

@@ -3,7 +3,7 @@ function creatEventListeners(board) {
     document.getElementById('initDijkstra').addEventListener('click', board.initDijkstra);
     document.getElementById('initDFS').addEventListener('click', board.initDFS);
     // document.getElementById('even_weights').addEventListener('click', board.evenWeights);
-    // document.getElementById('random_weights').addEventListener('click', board.randomWeights);
+    document.getElementById('Random/Even').addEventListener('click', board.toggleRandomEven);
     document.getElementById('skip').addEventListener('click',tutorial.exit)
     document.getElementById('tutorialButton').addEventListener('click',tutorial.initTutorail)
     document.getElementById('next').addEventListener('click',tutorial.next);
