@@ -106,7 +106,7 @@ button:hover {
 .header-user-dropdown .header-limiter h1{
 	float: left;
 	font:  40px calibri light;
-	line-height: 40px;
+	line-height: 30px;
 	margin:0;
 	font-weight: bold;
 }
@@ -114,7 +114,20 @@ button:hover {
 .header-user-dropdown .header-limiter h1 span {
 	color: #bc40df;
 }
+.header-user-dropdown .header-limiter h1 div {
+	font:  18px calibri light;
+	line-height: 50%;
+	color: #bc40df;
 
+}
+.header-user-dropdown .header-limiter .inline{
+	width: 15px;
+  	height: 15px;
+	/* display: inline; */
+	margin: 0 0.125em;
+	padding: 0;
+	vertical-align: baseline;
+  }
 /* The header links */
 
 .header-user-dropdown .header-limiter a {
