@@ -1,7 +1,7 @@
 class Board {
     constructor() {
         this.nodesMatrix;
-        this.boardElement = document.getElementById('board');
+        this.boardElement = document.getElementById('board'); //table element
         this.width;
         this.height;
         this.mSize; //matrix notation
@@ -39,6 +39,8 @@ class Board {
             board.appendChild(row);
         }
         //create nodes (for the algorithem)
+        //I think that NodesMatrix as class is redundent 
+        // It could very easily leave in the board class
         this.nodesMatrix = new NodesMatrix(this.mSize,this.nSize);
         for (let i=1 ; i<=this.mSize; i++) {
             for (let j=1 ; j<=this.nSize; j++){

@@ -1,3 +1,4 @@
+//All control logic is located here
 function creatEventListeners(board) {
     document.getElementById('clear').addEventListener('click', board.clearButton);
     document.getElementById('initDijkstra').addEventListener('click', board.initDijkstra);

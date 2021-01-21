@@ -6,18 +6,20 @@ class Dijkstra {
     }
 
     init = () => {
-        this.unvisited = this.board.nodesMatrix.getALLasArray();
-        this.unvisited.sort((a,b)=> (a.DISTANCE > b.DISTANCE) ? 1: -1);
-        while (this.unvisited.length >0) {
-            const node = this.unvisited.shift();
-            if (!node.WALL){
-                // node.VISITED = true;
-                this.visitOrder.push(node);
-                for (const neigh of node.neighbors) {
-                    if (!neigh.WALL)
-                        neigh.evaluate(node);
+        let q = new PriorityQueue((node1,node2)=>node2.DISTANCE-node1.DISTANCE)
+        let visited = new Set()
+        q.inqueue(this.board.startNode)
+        visited.add(this.board.startNode)
+        while (!q.isEmpty()){
+            let curr_node = q.dequeue()
+            this.visitOrder.push(curr_node)
+            for (let neigh of curr_node.neighbors){
+                if (!neigh.WALL & ! visited.has(neigh)){
+                    neigh.DISTANCE = curr_node.DISTANCE + neigh.WEIGHT
+                    neigh.PREV = curr_node
+                    visited.add(neigh)
+                    q.inqueue(neigh)
                 }
-                this.unvisited.sort((a,b)=> (a.DISTANCE > b.DISTANCE) ? 1: -1);
             }
         }
     }
